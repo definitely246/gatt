@@ -1,0 +1,37 @@
+{
+  "name": "gatt",
+  "version": "1.0.0",
+  "description": "Generate All The Things (GATT) using this library. It provides an extremely flexible workflow that should cover most use cases to scaffold some variables and template into an output directory.",
+  "main": "index.js",
+  "scripts": {
+    "test": "ava --watch tests/test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/def246/gatt.git"
+  },
+  "keywords": [
+    "generator",
+    "generate",
+    "all",
+    "the",
+    "things",
+    "template",
+    "builder",
+    "scaffold",
+    "scaffolding",
+    "bootstrap",
+    "utility"
+  ],
+  "author": "kelt@def246.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/def246/generate-all-the-things/issues"
+  },
+  "homepage": "https://github.com/def246/generate-all-the-things#readme",
+  "devDependencies": {
+    "ava": "^0.19.1"
+  },
+  "dependencies": {
+  }
+}
