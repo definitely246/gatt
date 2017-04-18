@@ -24,7 +24,29 @@ module.exports = {
 			{
 				"key1": "val11",
 				"key2": "val12",
-				"key3": "val13"
+				"key3": [
+					{"key1": "subval11" },
+					{"key1": "subval12" }
+					{"key1": "subval13" }
+				],
+			},
+			{
+				"key1": "val11",
+				"key2": "val12",
+				"key3": [
+					{"key1": "subval21" },
+					{"key1": "subval22" }
+					{"key1": "subval23" }
+				],
+			},
+			{
+				"key1": "val11",
+				"key2": "val12",
+				"key3": [
+					{"key1": "subval31" },
+					{"key1": "subval32" }
+					{"key1": "subval33" }
+				],
 			}
 		]
 	}
