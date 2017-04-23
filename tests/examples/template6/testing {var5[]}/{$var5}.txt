@@ -1,0 +1,9 @@
+Some stuff here 
+
+Instance: {%= $.$var5 %}
+
+All Instances: {%= 
+	$.var5.map(function(i) { 
+		return 'Instance: ' + i; 
+	}).join(' ') 
+%}

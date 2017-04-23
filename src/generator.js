@@ -1,59 +1,87 @@
 "use strict";
 
-import {extend} from 'util';
+let fs        = require('fs');
+let str_utils = require('./str_utils.js');
+let utils     = require('./utils.js');
+let reader    = require('./reader.js');
+let builder   = require('./builder.js');
+let parser    = require('./parser.js');
+let writer    = require('./writer.js');
 
-// import content_parser from './content_parser.js';
-// import template_parser from './template_parser.js';
-// import writer from './writer.js';
+let configDefault = {
+    "variables": null,                // this is an object of variables to use
+    "reader_directory": null,         // directory we will be using for our template
+    "writer_directory": null,         // directory we will output files into
 
-// var extend = require('util')._extend;
+    "reader"  : new reader,           // this is how we handle reading a template directory
+    "builder" : new builder,          // this is how we handle building out files and dynamic context
+    "parser"  : new parser,           // this is how we handle parsing each file in files array
+    "writer"  : new writer            // this is how we handle writing out a single file
+}
 
 function assertConfigValid(config)
 {
-    // fs.existsSync    
+    if (typeof config.variables != 'object')
+    {
+        throw "Variables needs to be an object";
+    }
 
-    // assert variables is not null!
+    if (!fs.existsSync(config.reader_directory))
+    {
+        throw "Reader directory does not exist: " + config.reader_directory;
+    }
 
-    // assert the template directory is a directory
-
-    // assert the output_directory is a real directory
-
-}
-
-let configDefault = {
-    "variables": null,                            // 
-    "writer": writer,
-    "reader": reader,
-
-    "template_directory": null,                   // directory we will be using for our template
-    // "output_directory": null,                     // directory we will output files into
-    // "content_parser": "./content_parser.js",      // parse each file's content using this method 
-    // "naming_parser": "./naming_parser.js",        // parse each filename/directory name using this method
-    // "writer": "./writer.js"                       // handles writing the files array to an output directory
+    if (!fs.existsSync(config.writer_directory))
+    {
+        throw "Writer directory does not exist: " + config.writer_directory;
+    }
 }
 
 class generator {
 
     constructor (config = {}) {
-
-        this.config = extend(configDefault, config);
-
+        this.config = utils.extend(configDefault, config);
         assertConfigValid(this.config);
     }
 
     run() {
+        var promises = [];
 
-        this.
-        console.log(this.config.variables);
-        // var variables = this.config.variables;
+        this.files().map((file) => {
+            this.build(file).map((build) => {
+                promises.push(this.write(build.path, this.parse(build.original, build.variables)));
+            });
+        });
 
-        // console.log('this is the variables path', variables);
+        return Promise.all(promises);
+    }
 
-        // var exported = require(variables);
+    files() {
+        return this.config.reader.files(
+            this.config.reader_directory
+        );        
+    }
 
-        // console.log(exported);
+    build(file) {
+        return this.config.builder.build(
+            file, this.config.variables
+        )
+    }
 
-        // console.log('running this bad boy!');
+    parse(file, variables = null) {
+        variables = variables != null ? variables : this.config.variables;
+        return this.config.parser.parse(
+            file, variables
+        );
+    }
+
+    write(file_path, file_content) {
+        let relative_path = str_utils.replace_first(this.config.reader_directory, '', file_path);
+        let fullpath = this.config.writer_directory + relative_path;
+        let dirname = utils.dirname(fullpath);
+        let basename = utils.basename(fullpath);
+
+        return this.config.writer.write( dirname, basename, file_content );
     }
 }
 

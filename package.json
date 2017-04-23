@@ -4,7 +4,12 @@
   "description": "Generate All The Things (GATT) using this library. It provides an extremely flexible workflow that should cover most use cases to scaffold some variables and template into an output directory.",
   "main": "index.js",
   "scripts": {
-    "test": "ava --watch tests/test.js"
+    "test": "ava tests/*.js",
+    "test:watch": "ava --watch tests/*.js",
+    "test:unit": "ava tests/unit.js",
+    "test:unit:watch": "ava --watch tests/unit.js",
+    "test:func": "ava tests/func.js",
+    "test:func:watch": "ava --watch tests/func.js"
   },
   "repository": {
     "type": "git",
@@ -30,8 +35,12 @@
   },
   "homepage": "https://github.com/def246/generate-all-the-things#readme",
   "devDependencies": {
-    "ava": "^0.19.1"
+    "ava": "^0.19.1",
+    "rimraf": "^2.6.1",
+    "sinon": "^2.1.0"
   },
   "dependencies": {
+    "blueimp-tmpl": "^3.8.0",
+    "jsonpath": "^0.2.11"
   }
 }

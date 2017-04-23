@@ -23,31 +23,31 @@ module.exports = {
 		"var6": [
 			{
 				"key1": "val11",
-				"key2": "val12",
-				"key3": [
-					{"key1": "subval11" },
-					{"key1": "subval12" }
-					{"key1": "subval13" }
+				"key2": [
+					{"sub_key": "subval11" },
+					{"sub_key": "subval12" },
+					{"sub_key": "subval13" }
 				],
 			},
 			{
-				"key1": "val11",
-				"key2": "val12",
-				"key3": [
-					{"key1": "subval21" },
-					{"key1": "subval22" }
-					{"key1": "subval23" }
+				"key1": "val21",
+				"key2": [
+					{"sub_key": "subval21" },
+					{"sub_key": "subval22" },
+					{"sub_key": "subval23" }
 				],
 			},
 			{
-				"key1": "val11",
-				"key2": "val12",
-				"key3": [
-					{"key1": "subval31" },
-					{"key1": "subval32" }
-					{"key1": "subval33" }
+				"key1": "val31",
+				"key2": [
+					{"sub_key": "subval31" },
+					{"sub_key": "subval32" },
+					{"sub_key": "subval33" }
 				],
 			}
 		]
-	}
+	},
+	"var5" : [
+		"a", "b", "c"
+	]
 };
