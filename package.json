@@ -41,6 +41,7 @@
   },
   "dependencies": {
     "blueimp-tmpl": "^3.8.0",
-    "jsonpath": "^0.2.11"
+    "jsonpath": "^0.2.11",
+    "mkdirp": "^0.5.1"
   }
 }
