@@ -4,7 +4,11 @@ Generate All The Things using a template reader/writer pattern.
 
 ## Usage
 
-First download and install gatt
+To get an idea of how you would use gatt, test this example out on runkit
+
+[Gatt example on runkit.com](https://runkit.com/58dd6255cdcd770014b0f7c8/59020e171ce99600127a8c6b)
+
+Otherwise you can  download and install gatt locally on your machine.
 
 ```
 npm install gatt
