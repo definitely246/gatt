@@ -4,11 +4,59 @@ Generate All The Things using a template reader/writer pattern.
 
 ## Usage
 
-To get an idea of how you would use gatt, test this example out on runkit
+To get an idea of how you would use gatt without installing it directly, test this example out on runkit
 
 [Gatt example on runkit.com](https://runkit.com/58dd6255cdcd770014b0f7c8/59020e171ce99600127a8c6b)
 
-Otherwise you can  download and install gatt locally on your machine.
+
+```
+var gatt = require("gatt")
+var fs = require('fs')
+
+var variables = {
+  "foo": "Hello there!",
+  "bar": { "a": 'asdf' },
+  "baz": [
+    'a', 'b', 'c'
+  ],
+  "bap": [
+    { 'a' : 1 },
+    { 'a' : 2 },
+    { 'a' : 3 }
+  ]
+};
+
+// setup the template and build directories for this test
+// ideally you wouldn't need to setup your directory structure
+// this way. You would probably alredy have the template/ directory
+// setup with the file structure you wanted.
+fs.mkdirSync('template')
+fs.mkdirSync('build');
+fs.mkdirSync('template/{bap[].a}')
+fs.writeFileSync('template/{bar.a}.txt', 'this var foo = {%= $.foo %}')
+fs.writeFileSync('template/{baz[]}.txt', 'current iteration value = {%= $.$baz %} and baz = {%= $.baz.join(",") %} ')
+fs.writeFileSync('template/{bap[].a}/{$bap.a}.txt', 'current iteration value = {%= $.$bap.a %} and foo = {%= $.foo %}')
+
+
+// generate all the things
+// this looks at our template/ directory and writes
+// the files out to the build/ directory
+await gatt({
+    reader_directory: 'template/',
+    writer_directory: 'build/',
+    variables: variables
+});
+
+// we can example the output in the built directory
+console.log(fs.readdirSync('build'))
+console.log(fs.readFileSync('build/asdf.txt').toString())
+console.log(fs.readFileSync('build/a.txt').toString())
+console.log(fs.readFileSync('build/b.txt').toString())
+console.log(fs.readFileSync('build/1/1.txt').toString())
+```
+
+
+Otherwise you can download and install gatt locally on your machine.
 
 ```
 npm install gatt
