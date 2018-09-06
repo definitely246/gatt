@@ -1,6 +1,7 @@
 
 let fs = require('fs');
 let ejs = require('ejs');
+let _ = require('lodash');
 
 /**
  * Parse a file with given variables and return some content as a string
@@ -17,6 +18,7 @@ class parser {
             let context = {};
 
             context[this.rootPath] = variables;
+            context['_'] = _;
 
             return ejs.render(fs.readFileSync(file).toString(), context, { filename: file });
     	}

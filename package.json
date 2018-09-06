@@ -1,6 +1,6 @@
 {
   "name": "gatt",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Generate All The Things (GATT) using this library. It provides an extremely flexible workflow that should cover most use cases to scaffold some variables and template into an output directory.",
   "main": "index.js",
   "scripts": {
@@ -41,7 +41,9 @@
   },
   "dependencies": {
     "ejs": "^2.6.1",
+    "isbinaryfile": "^3.0.3",
     "jsonpath": "^0.2.11",
+    "lodash": "^4.17.10",
     "mkdirp": "^0.5.1"
   }
 }

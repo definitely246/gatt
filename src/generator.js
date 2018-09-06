@@ -1,12 +1,13 @@
 "use strict";
 
-let fs        = require('fs');
-let str_utils = require('./str_utils.js');
-let utils     = require('./utils.js');
-let reader    = require('./reader.js');
-let builder   = require('./builder.js');
-let parser    = require('./parser.js');
-let writer    = require('./writer.js');
+let fs           = require('fs');
+let isBinaryFile = require("isbinaryfile");
+let str_utils    = require('./str_utils.js');
+let utils        = require('./utils.js');
+let reader       = require('./reader.js');
+let builder      = require('./builder.js');
+let parser       = require('./parser.js');
+let writer       = require('./writer.js');
 
 let configDefault = {
     "variables": null,                // this is an object of variables to use
@@ -49,7 +50,11 @@ class generator {
 
         this.files().map((file) => {
             this.build(file).map((build) => {
-                promises.push(this.write(build.path, this.parse(build.original, build.variables)));
+                if (isBinaryFile.sync(file)) {
+                    promises.push(this.write(build.path, fs.readFileSync(build.original)));
+                } else {
+                    promises.push(this.write(build.path, this.parse(build.original, build.variables)));
+                }
             });
         });
 
