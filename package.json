@@ -36,11 +36,11 @@
   "homepage": "https://github.com/def246/generate-all-the-things#readme",
   "devDependencies": {
     "ava": "^0.19.1",
-    "rimraf": "^2.6.1",
-    "sinon": "^2.1.0"
+    "rimraf": "^2.6.2",
+    "sinon": "^2.4.1"
   },
   "dependencies": {
-    "blueimp-tmpl": "^3.8.0",
+    "ejs": "^2.6.1",
     "jsonpath": "^0.2.11",
     "mkdirp": "^0.5.1"
   }

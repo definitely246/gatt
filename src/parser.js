@@ -1,6 +1,6 @@
 
 let fs = require('fs');
-let tmpl = require('blueimp-tmpl');
+let ejs = require('ejs');
 
 /**
  * Parse a file with given variables and return some content as a string
@@ -8,13 +8,17 @@ let tmpl = require('blueimp-tmpl');
  */
 class parser {
 
-	constructor(tmplRoot = '$') {
-		tmpl.arg = tmplRoot
+	constructor(rootPath = '$') {
+		this.rootPath = rootPath
 	}
 
     parse(file, variables) {
     	try {
-			return tmpl(fs.readFileSync(file).toString(), variables);
+            let context = {};
+
+            context[this.rootPath] = variables;
+
+            return ejs.render(fs.readFileSync(file).toString(), context);
     	}
     	catch (e) {
 
