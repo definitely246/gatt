@@ -18,7 +18,7 @@ class parser {
 
             context[this.rootPath] = variables;
 
-            return ejs.render(fs.readFileSync(file).toString(), context);
+            return ejs.render(fs.readFileSync(file).toString(), context, { filename: file });
     	}
     	catch (e) {
 
