@@ -113,12 +113,12 @@ built/
 
 ## Example Templates
 
-Out of the box the parser uses [blueimp-tmpl](https://github.com/blueimp/JavaScript-Templates). You can override this if you want to use some other parser. Here is some example syntax available from blueimp-tmpl. If you put this in your files you should see your content update when the file is built.
+Out of the box the parser uses [Embedded Javascript Templating](http://ejs.co/) for parsing templates. You can override this if you want to use some other parser. Here is some example syntax. If you put this in your files you should see your content update when the file is built.
 
 ```
 // inside of template/{bar[]}.txt
-this instance of bar = {%= $.$bar %} 
-this key for bar {%= $.$ %}
+this instance of bar = <%= $.$bar %>
+this key for bar <%= $.$ %>
 ```
 
 You can nest arrays of arrays as well, for example:
